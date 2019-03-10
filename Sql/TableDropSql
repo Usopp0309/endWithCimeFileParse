@@ -1,0 +1,86 @@
+drop table `BaseVoltage`;
+
+drop table `ControlArea`;
+
+drop table `Substation`;
+
+drop table `VoltageLevel`;
+
+drop table `Breaker`;
+
+drop table `LoadBreakSwitch`;
+
+drop table `Fuse`;
+
+drop table `Disconnector`;
+
+drop table `GroundDisconnector`;
+
+drop table `BusbarSection`;
+
+drop table `SynchronousMachine`;
+
+drop table `ACLineSegment`;
+
+drop table `ACLineDot`;
+
+drop table `DCLineSegment`;
+
+drop table `DCLineDot`;
+drop table 'dlscddmonthpaper';
+
+drop table `Dcsmoothingreactor`;
+
+drop table `Dcfilter`;
+
+drop table `RectifierInverter`;
+
+drop table `Load`;
+
+drop table `PowerTransformer`;
+
+drop table `TransformerWinding`;
+
+drop table `TapChangerType`;
+
+drop table `ShuntCompensator`;
+
+drop table `SeriesCompensator`;
+
+drop table `FeederPW`;
+
+drop table `SubstationPW`;
+
+drop table `CompositeSwitchPW`;
+
+drop table `BreakerPW`;
+
+drop table `LoadBreakSwitchPW`;
+
+drop table `FusePW`;
+
+drop table `DisconnectorPW`;
+
+drop table `GroundDisconnectorPW`;
+
+drop table `BusbarSectionPW`;
+
+drop table `GeneratorPW`;
+
+drop table `EnergyStorageEquipmentPW`;
+
+drop table `ACLineSegmentPW`;
+
+drop table `EnergyConsumerPW`;
+
+drop table `PowerTransformerPW`;
+
+drop table `ReactorPW`;
+
+drop table `CapacitorPW`;
+
+drop table `FaultIndicatorPW`;
+
+drop table `TVPW`;
+
+drop table `PolePW`;

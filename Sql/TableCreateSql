@@ -1,0 +1,92 @@
+
+CREATE TABLE `BaseVoltage` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `nomkV` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ControlArea` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `Parent` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Substation` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `ControlArea` varchar(255) DEFAULT NULL, `graph_name` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `VoltageLevel` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `highkV` varchar(255) DEFAULT NULL, `lowkV` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Breaker` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL, `breakingCapacity` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `LoadBreakSwitch` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Fuse` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Disconnector` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `GroundDisconnector` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `BusbarSection` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL, `vmax` varchar(255) DEFAULT NULL, `vmin` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `SynchronousMachine` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL, `RatedMW` varchar(255) DEFAULT NULL, `maxU` varchar(255) DEFAULT NULL, `minU` varchar(255) DEFAULT NULL, `maxQ` varchar(255) DEFAULT NULL, `minQ` varchar(255) DEFAULT NULL, `maxP` varchar(255) DEFAULT NULL, `minP` varchar(255) DEFAULT NULL, `r` varchar(255) DEFAULT NULL, `x` varchar(255) DEFAULT NULL, `r0` varchar(255) DEFAULT NULL, `x0` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ACLineSegment` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `StartSt` varchar(255) DEFAULT NULL, `EndSt` varchar(255) DEFAULT NULL, `ratedMW` varchar(255) DEFAULT NULL, `ratedCurrent` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `r` varchar(255) DEFAULT NULL, `x` varchar(255) DEFAULT NULL, `bch` varchar(255) DEFAULT NULL, `r0` varchar(255) DEFAULT NULL, `x0` varchar(255) DEFAULT NULL, `bch0` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ACLineDot` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `ACLineSegment` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `DCLineSegment` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `StartSt` varchar(255) DEFAULT NULL, `EndSt` varchar(255) DEFAULT NULL, `r` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `DCLineDot` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `DCLineSegment` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Dcsmoothingreactor` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Dcfilter` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `RectifierInverter` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `bridges` varchar(255) DEFAULT NULL, `ratedKV` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Z_node` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Load` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `PowerTransformer` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `wind_type` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `NoLoadLoss` varchar(255) DEFAULT NULL, `ExcitingCurrent` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `TransformerWinding` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `WindingType` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `PowerTransformer` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL, `TapChangerType` varchar(255) DEFAULT NULL, `ratedMVA` varchar(255) DEFAULT NULL, `ratedkV` varchar(255) DEFAULT NULL, `loadLoss` varchar(255) DEFAULT NULL, `leakageImpedence` varchar(255) DEFAULT NULL, `r` varchar(255) DEFAULT NULL, `x` varchar(255) DEFAULT NULL, `r0` varchar(255) DEFAULT NULL, `x0` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `TapChangerType` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `neutralStep` varchar(255) DEFAULT NULL, `highStep` varchar(255) DEFAULT NULL, `lowStep` varchar(255) DEFAULT NULL, `stepVolIncre` varchar(255) DEFAULT NULL, `neutralKV` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ShuntCompensator` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `nomQ` varchar(255) DEFAULT NULL, `V_rate` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `SeriesCompensator` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `r` varchar(255) DEFAULT NULL, `x` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `VoltageLevel` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `FeederPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `HVSubstation` varchar(255) DEFAULT NULL, `graph_name` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `SubstationPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `CompositeSwitchPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `BreakerPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `normalOpen` varchar(255) DEFAULT NULL, `breakingCapacity` varchar(255) DEFAULT NULL, `CompositeSwitch` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `LoadBreakSwitchPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `normalOpen` varchar(255) DEFAULT NULL, `CompositeSwitch` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `FusePW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `CompositeSwitch` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `DisconnectorPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `CompositeSwitch` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `GroundDisconnectorPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `BusbarSectionPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `GeneratorPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `RatedPMW` varchar(255) DEFAULT NULL, `RatedQMW` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `EnergyStorageEquipmentPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `RatedKV` varchar(255) DEFAULT NULL, `ActiveEnergy` varchar(255) DEFAULT NULL, `InRatedMW` varchar(255) DEFAULT NULL, `OutRatedMW` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ACLineSegmentPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `ratedCurrent` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `Model` varchar(255) DEFAULT NULL, `Length` varchar(255) DEFAULT NULL, `ratedMW` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `EnergyConsumerPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `RatedMW` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `PowerTransformerPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `ratedMVA` varchar(255) DEFAULT NULL, `I_BaseVoltage` varchar(255) DEFAULT NULL, `J_BaseVoltage` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `I_ratedMW` varchar(255) DEFAULT NULL, `I_ratedkV` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `J_ratedMW` varchar(255) DEFAULT NULL, `J_ratedkV` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ReactorPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `CapacitorPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `J_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `BaseVoltage` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `FaultIndicatorPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `ConductingEquipment` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `Feeder` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `TVPW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `ConductingEquipment` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `Substation` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL, `Pole` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `PolePW` (`Num` varchar(255) DEFAULT NULL, `mRID` varchar(255) NOT NULL, `name` varchar(255) DEFAULT NULL, `I_node` varchar(255) DEFAULT NULL, `rdfid` varchar(255) DEFAULT NULL,  PRIMARY KEY (`mRID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE 'dlscddmonthpaper' (
+'mRID' varchar(255) NOT NULL,
+ 'attrName'  varchar(255),
+ PRIMARY KEY (`mRID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
